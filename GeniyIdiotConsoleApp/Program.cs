@@ -23,6 +23,7 @@ namespace GeniyIdiotConsoleApp
             int countRightAnswers = 0;
             for (int i = 0; i < 5; i++)
             {
+                Console.WriteLine($"Question № {i+1}");
                 Console.WriteLine(questions[i]);
 
                 int userAnswer = Convert.ToInt32(Console.ReadLine());
@@ -35,7 +36,51 @@ namespace GeniyIdiotConsoleApp
             }
             Console.WriteLine($"You answered {countRightAnswers} questions correctly");
 
+            //string diagnos = "";
+            //if (countRightAnswers == 0)
+            //{
+            //    diagnos = "But you can read, that's not bad!";
+            //}
+            //if (countRightAnswers == 1)
+            //{
+            //    diagnos = "You are on the right track, don't stop!";
+            //}
+            //if (countRightAnswers == 2)
+            //{
+            //    diagnos = "Did you definitely go to school?";
+            //}
+            //if (countRightAnswers == 3)
+            //{
+            //    diagnos = "Don't worry, statistics are on your side";
+            //}
+            //if (countRightAnswers == 4)
+            //{
+            //    diagnos = "You're a talent!";
+            //}
+            //if (countRightAnswers == 5)
+            //{
+            //    diagnos = "Genius. Just a genius.";
+            //}
 
+            //switch (countRightAnswers)
+            //{
+            //    case 0: diagnos = "But you can read, that's not bad!"; break;
+            //    case 1: diagnos = "You are on the right track, don't stop!"; break;
+            //    case 2: diagnos = "Did you definitely go to school?"; break;
+            //    case 3: diagnos = "Don't worry, statistics are on your side"; break;
+            //    case 4: diagnos = "You're a talent!"; break;
+            //    case 5: diagnos = "Genius. Just a genius."; break;       
+                                   
+            //}
+
+            string[] diagnoses = new string[6];
+
+            diagnoses[0] = "But you can read, that's not bad!"; 
+            diagnoses[1] = "You are on the right track, don't stop!";
+            diagnoses[2] = "Did you definitely go to school?";
+            diagnoses[3] = "Don't worry, statistics are on your side"; 
+            diagnoses[4] = "You're a talent!"; 
+            diagnoses[5] = "Genius. Just a genius."; 
         }
     }
 }
