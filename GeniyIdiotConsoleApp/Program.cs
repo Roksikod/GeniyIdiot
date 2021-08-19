@@ -24,7 +24,16 @@ namespace GeniyIdiotConsoleApp
             for (int i = 0; i < 5; i++)
             {
                 Console.WriteLine(questions[i]);
+
+                int userAnswer = Convert.ToInt32(Console.ReadLine());
+
+                int rightAnswer = answers[i];
+                if (userAnswer==rightAnswer)
+                {
+                    countRightAnswers++;
+                }
             }
+            Console.WriteLine($"You answered {countRightAnswers} questions correctly");
 
 
         }
