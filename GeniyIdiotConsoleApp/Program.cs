@@ -4,6 +4,50 @@ namespace GeniyIdiotConsoleApp
 {
     class Program
     {
+        static void Main(string[] args)
+        {
+            int countQuestions = 5;
+            string[] questions = GetQuestions(countQuestions);
+            int[] answers = GetAnswers(countQuestions);
+
+            int countRightAnswers = 0;
+
+            Random random = new Random();
+
+            //a random question should not be repeated: option with shuffle
+
+            for (int i = questions.Length - 1; i > 0; i--)
+            {
+                int randomIndex = random.Next(i);
+
+                string tempQuestion = questions[randomIndex];
+                questions[randomIndex] = questions[i];
+                questions[i] = tempQuestion;
+
+                int tempAnswer = answers[randomIndex];
+                answers[randomIndex] = answers[i];
+                answers[i] = tempAnswer;
+            }
+
+            for (int i = 0; i < 5; i++)
+            {
+                Console.WriteLine($"Question № {i + 1}");                
+
+                Console.WriteLine(i); 
+
+                int userAnswer = Convert.ToInt32(Console.ReadLine());
+
+                int rightAnswer = answers[i]; 
+                if (userAnswer == rightAnswer)
+                {
+                    countRightAnswers++;
+                }
+            }
+            Console.WriteLine($"You answered {countRightAnswers} questions correctly");
+
+            string[] diagnoses = GetDiagnose(countRightAnswers);
+        }
+
         static string[] GetQuestions(int countQuestions)
         {
             string[] questions = new string[5];
@@ -37,37 +81,6 @@ namespace GeniyIdiotConsoleApp
             diagnoses[4] = "You're a talent!";
             diagnoses[5] = "Genius. Just a genius.";
             return diagnoses;
-        }
-
-        static void Main(string[] args)
-        {
-            int countQuestions = 5;
-            string[] questions = GetQuestions(countQuestions);
-            int[] answers = GetAnswers(countQuestions);
-
-            int countRightAnswers = 0;
-
-            Random random = new Random();
-
-            for (int i = 0; i < 5; i++)
-            {
-                Console.WriteLine($"Question № {i + 1}");
-
-                int randomQuestionIndex = random.Next(0, 5);
-                Console.WriteLine(randomQuestionIndex);
-
-                int userAnswer = Convert.ToInt32(Console.ReadLine());
-
-                int rightAnswer = answers[randomQuestionIndex];
-                if (userAnswer == rightAnswer)
-                {
-                    countRightAnswers++;
-                }
-            }
-
-            Console.WriteLine($"You answered {countRightAnswers} questions correctly");
-
-            string[] diagnoses = GetDiagnose(countRightAnswers);
         }
     }
 }
