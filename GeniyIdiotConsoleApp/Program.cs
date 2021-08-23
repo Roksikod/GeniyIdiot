@@ -14,33 +14,30 @@ namespace GeniyIdiotConsoleApp
 
             Random random = new Random();
 
-            for (int i = 0; i < 1000; i++)
+            //a random question should not be repeated: option with shuffle
+
+            for (int i = questions.Length - 1; i > 0; i--)
             {
-                //a random question should not be repeated: option with time variable
+                int randomIndex = random.Next(i);
 
-                int randomIndex1 = random.Next(0, countQuestions);
-                int randomIndex2 = random.Next(0, countQuestions);
+                string tempQuestion = questions[randomIndex];
+                questions[randomIndex] = questions[i];
+                questions[i] = tempQuestion;
 
-                string tempQuestion = questions[randomIndex1];
-                questions[randomIndex1] = questions[randomIndex2];
-                questions[randomIndex2] = tempQuestion;
-
-                int tempAnswer = answers[randomIndex1];
-                answers[randomIndex1] = answers[randomIndex2];
-                answers[randomIndex2] = tempAnswer;
+                int tempAnswer = answers[randomIndex];
+                answers[randomIndex] = answers[i];
+                answers[i] = tempAnswer;
             }
 
             for (int i = 0; i < 5; i++)
             {
-                Console.WriteLine($"Question № {i + 1}");
+                Console.WriteLine($"Question № {i + 1}");                
 
-                int randomQuestionIndex = random.Next(0, 5); //delete
-
-                Console.WriteLine(randomQuestionIndex); //questions[i]
+                Console.WriteLine(i); 
 
                 int userAnswer = Convert.ToInt32(Console.ReadLine());
 
-                int rightAnswer = answers[randomQuestionIndex]; //[i]
+                int rightAnswer = answers[i]; 
                 if (userAnswer == rightAnswer)
                 {
                     countRightAnswers++;
@@ -84,6 +81,6 @@ namespace GeniyIdiotConsoleApp
             diagnoses[4] = "You're a talent!";
             diagnoses[5] = "Genius. Just a genius.";
             return diagnoses;
-        }        
+        }
     }
 }
