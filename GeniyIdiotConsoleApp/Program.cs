@@ -11,7 +11,29 @@ namespace GeniyIdiotConsoleApp
             int[] answers = GetAnswers(countQuestions);
 
             int countRightAnswers = 0;
+            Shuffle(questions, answers);
 
+            for (int i = 0; i < 5; i++)
+            {
+                Console.WriteLine($"Question № {i + 1}");
+
+                Console.WriteLine(i);
+
+                int userAnswer = Convert.ToInt32(Console.ReadLine());
+
+                int rightAnswer = answers[i];
+                if (userAnswer == rightAnswer)
+                {
+                    countRightAnswers++;
+                }
+            }
+            Console.WriteLine($"You answered {countRightAnswers} questions correctly");
+
+            string[] diagnoses = GetDiagnose(countRightAnswers);
+        }
+
+        private static void Shuffle(string[] questions, int[] answers)
+        {
             Random random = new Random();
 
             //a random question should not be repeated: option with shuffle
@@ -28,24 +50,6 @@ namespace GeniyIdiotConsoleApp
                 answers[randomIndex] = answers[i];
                 answers[i] = tempAnswer;
             }
-
-            for (int i = 0; i < 5; i++)
-            {
-                Console.WriteLine($"Question № {i + 1}");                
-
-                Console.WriteLine(i); 
-
-                int userAnswer = Convert.ToInt32(Console.ReadLine());
-
-                int rightAnswer = answers[i]; 
-                if (userAnswer == rightAnswer)
-                {
-                    countRightAnswers++;
-                }
-            }
-            Console.WriteLine($"You answered {countRightAnswers} questions correctly");
-
-            string[] diagnoses = GetDiagnose(countRightAnswers);
         }
 
         static string[] GetQuestions(int countQuestions)
