@@ -1,37 +1,67 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace GeniyIdiotConsoleApp
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
-        {
-            int countQuestions = 5;
-            string[] questions = GetQuestions(countQuestions);
-            int[] answers = GetAnswers(countQuestions);
+        {            
+            var questions = GetQuestions();
+            var countQuestions = questions.Count;
+            var countRightAnswers = 0;
 
-            int countRightAnswers = 0;
-            Shuffle(questions, answers);
-
-            for (int i = 0; i < 5; i++)
+            var random = new Random ();
+            for (int i = 0; i < countQuestions; i++)
             {
                 Console.WriteLine($"Question № {i + 1}");
 
-                Console.WriteLine(i);
+                var randomIndex = random.Next(0, questions.Count);
 
-                int userAnswer = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine(questions[randomIndex].Text);
 
-                int rightAnswer = answers[i];
+                var userAnswer = GetUserAnswer();
+
+                var rightAnswer = questions[randomIndex].Answer;
                 if (userAnswer == rightAnswer)
                 {
                     countRightAnswers++;
                 }
+                questions.RemoveAt(randomIndex);
+                
             }
             Console.WriteLine($"You answered {countRightAnswers} questions correctly");
 
             string[] diagnoses = GetDiagnose(countRightAnswers);
         }
 
+        private static int GetUserAnswer()
+        {
+            throw new NotImplementedException();
+        }
+
+        public static List<Question> GetQuestions()
+        {
+            var questions = new List <Question>();
+            var newQuestion = new Question();
+            questions. Add (new Question ("2 + 2 * 2 = ?"), 6);
+            questions.Add (new Question ("How many months in a year have 28 days?"), 12);
+            questions.Add(new Question("How many cuts do you need to cut a log into 10 pieces?"), 9);
+            questions.Add(new Question("There are 10 fingers on two hands. How many fingers are there on 5 hands?"), 25);
+            questions.Add(new Question("Five candles were burning. Two went out. How many candles are left?"), 2);
+            return questions;
+        }
+
+        static int[] GetAnswers(int countQuestions)
+        {
+            int[] answers = new int[5];
+            answers[0] = 6;
+            answers[1] = 12;
+            answers[2] = 9;
+            answers[3] = 25;
+            answers[4] = 2;
+            return answers;
+        }
         private static void Shuffle(string[] questions, int[] answers)
         {
             Random random = new Random();
@@ -51,29 +81,6 @@ namespace GeniyIdiotConsoleApp
                 answers[i] = tempAnswer;
             }
         }
-
-        static string[] GetQuestions(int countQuestions)
-        {
-            string[] questions = new string[5];
-            questions[0] = "2 + 2 * 2 = ?";
-            questions[1] = "How many months in a year have 28 days?";
-            questions[2] = "How many cuts do you need to cut a log into 10 pieces?";
-            questions[3] = "There are 10 fingers on two hands. How many fingers are there on 5 hands?";
-            questions[4] = "Five candles were burning. Two went out. How many candles are left?";
-            return questions;
-        }
-
-        static int[] GetAnswers(int countQuestions)
-        {
-            int[] answers = new int[5];
-            answers[0] = 6;
-            answers[1] = 12;
-            answers[2] = 9;
-            answers[3] = 25;
-            answers[4] = 2;
-            return answers;
-        }
-
         static string[] GetDiagnose(int countRightAnswers)
         {
             string[] diagnoses = new string[6];
